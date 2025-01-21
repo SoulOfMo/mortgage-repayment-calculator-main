@@ -1,6 +1,6 @@
 {
-  "homepage": "https://github.com/SoulOfMo/mortgage-repayment-calculator-main",
-  "name": "my-app",
+  "name": "mortgage-repayment-calculator-main",
+  "homepage": "https://github.io/SoulOfMo/mortgage-repayment-calculator-main/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
