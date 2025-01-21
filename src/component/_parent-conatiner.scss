@@ -1,0 +1,9 @@
+.parent-container {
+  width: 700px;
+  display: grid;
+  place-content: center;
+  margin: auto;
+  grid-template-columns: repeat(2, 1fr);
+  background-color: $white;
+  border-radius: 15px;
+}

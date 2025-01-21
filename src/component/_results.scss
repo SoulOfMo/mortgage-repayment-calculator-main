@@ -1,0 +1,61 @@
+.results-container {
+  background-color: $slate-900;
+  border-radius: 0 15px 15px 40px;
+  display: flex;
+  padding: 25px 25px 0;
+  img {
+    margin: 0 auto;
+  }
+  .empty-result {
+    p {
+      color: $white;
+      text-align: center;
+      font-weight: $ff-lg;
+      margin-bottom: 10px;
+    }
+    span {
+      display: block;
+      text-align: center;
+      color: $slate-300;
+      width: 320px;
+      font-size: 1.2rem;
+    }
+  }
+  .result-page {
+    p {
+      color: $white;
+      font-weight: $ff-lg;
+      margin-bottom: 10px;
+    }
+    span {
+      color: $slate-300;
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+    .result {
+      background-color: #0e2431;
+      width: 300px;
+      margin: 20px auto 0;
+      border-top: 2px solid $Lime;
+      padding: 20px;
+      border-radius: 5px;
+      span {
+        color: $slate-300;
+        font-size: 1rem;
+      }
+    }
+    .repayments {
+      font-size: 2rem;
+      color: $Lime;
+      font-size: 4rem;
+    }
+    hr {
+      border-color: $slate-700;
+      margin-bottom: 15px;
+    }
+
+    .total-repayment {
+      color: $white;
+    }
+  }
+}

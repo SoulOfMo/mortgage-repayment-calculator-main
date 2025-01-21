@@ -1,0 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+@import "./component/variables";
+@import "./component/reset";
+@import "./component/calculator";
+@import "./component/parent-conatiner";
+
+@import "./component/results";
+
+#root {
+  height: 100%;
+  background-color: $slate-100;
+  place-content: center;
+}
