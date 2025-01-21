@@ -1,6 +1,6 @@
 {
   "name": "mortgage-repayment-calculator-main",
-  "homepage": "https://github.io/SoulOfMo/mortgage-repayment-calculator-main/",
+  "homepage": "https://soulOfMo.github.io/mortgage-repayment-calculator-main/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,12 +13,11 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-  
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-     "predeploy": "yarn build",
+    "predeploy": "yarn build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
