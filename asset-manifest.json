@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/SoulOfMo/mortgage-repayment-calculator-main/static/css/main.0e3bb94c.css",
-    "main.js": "/SoulOfMo/mortgage-repayment-calculator-main/static/js/main.37d4d277.js",
-    "static/media/illustration-empty.svg": "/SoulOfMo/mortgage-repayment-calculator-main/static/media/illustration-empty.386ea08ab891d163a8b41f8d62d21413.svg",
-    "index.html": "/SoulOfMo/mortgage-repayment-calculator-main/index.html",
-    "main.0e3bb94c.css.map": "/SoulOfMo/mortgage-repayment-calculator-main/static/css/main.0e3bb94c.css.map",
-    "main.37d4d277.js.map": "/SoulOfMo/mortgage-repayment-calculator-main/static/js/main.37d4d277.js.map"
+    "main.css": "/mortgage-repayment-calculator-main/static/css/main.36288e7a.css",
+    "main.js": "/mortgage-repayment-calculator-main/static/js/main.efcc6f7b.js",
+    "static/media/illustration-empty.svg": "/mortgage-repayment-calculator-main/static/media/illustration-empty.386ea08ab891d163a8b41f8d62d21413.svg",
+    "index.html": "/mortgage-repayment-calculator-main/index.html",
+    "main.36288e7a.css.map": "/mortgage-repayment-calculator-main/static/css/main.36288e7a.css.map",
+    "main.efcc6f7b.js.map": "/mortgage-repayment-calculator-main/static/js/main.efcc6f7b.js.map"
   },
   "entrypoints": [
-    "static/css/main.0e3bb94c.css",
-    "static/js/main.37d4d277.js"
+    "static/css/main.36288e7a.css",
+    "static/js/main.efcc6f7b.js"
   ]
 }
