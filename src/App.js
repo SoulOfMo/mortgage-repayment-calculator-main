@@ -1,10 +1,10 @@
-import { use, useState } from "react";
+import { useState } from "react";
 import emptyIllustration from "./assets/images/illustration-empty.svg";
 import "./styles.css";
 function App() {
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState("");
-  const [totalRepayment, setTotalRepayment] = useState();
+  const [totalRepayment, setTotalRepayment] = useState("");
   return (
     <div className="parent-container">
       <Calculator
@@ -33,6 +33,12 @@ function Calculator({
   const [term, setTerm] = useState("");
   const [rate, setRate] = useState("");
   const [err, setErr] = useState(false);
+  const [type, setType] = useState("");
+
+  function handleMortgageType(value) {
+    setType(value);
+    console.log(type);
+  }
   function handleSetAmount(value) {
     setAmount(value);
     console.log(amount);
@@ -53,6 +59,8 @@ function Calculator({
     setRate("");
     setTerm("");
     handleShowResult(false);
+    setType("");
+    setErr(false);
   }
 
   function handleSubmit(e) {
@@ -61,7 +69,8 @@ function Calculator({
     if (
       amount.trim(" ") === "" ||
       term.trim(" ") === "" ||
-      rate.trim(" ") === ""
+      rate.trim(" ") === "" ||
+      type === ""
     ) {
       setErr(true);
       return;
@@ -80,14 +89,24 @@ function Calculator({
     const formmattedTotalRepayment = formmatted.format(
       totalRepayment.toFixed(2)
     );
+    const interest = (Number(amount) * Number(rate)) / (12 * 100);
+    const formmattedInterest = formmatted.format(interest.toFixed(2));
 
+    const totalInterest = formmatted.format(
+      (interest * 12 * Number(term)).toFixed(2)
+    );
     console.log(
       formmatted.format(result.toFixed(2)),
       formmatted.format(totalRepayment.toFixed(2))
     );
-    handleSetResult(formmattedResult);
-    handleTotalRepayment(formmattedTotalRepayment);
 
+    if (type === "repayment") {
+      handleSetResult(formmattedResult);
+      handleTotalRepayment(formmattedTotalRepayment);
+    } else if (type === "interest") {
+      handleSetResult(formmattedInterest);
+      handleTotalRepayment(totalInterest);
+    }
     handleShowResult(true);
   }
 
@@ -102,8 +121,8 @@ function Calculator({
       <form>
         <div className="form--row">
           <label>mortgage amount</label>
-          <div className="amount-input">
-            <span>£</span>
+          <div className={err === true ? "error amount-input" : "amount-input"}>
+            <span className={err === true ? "error" : ""}>£</span>
             <input
               className="no-spinners"
               cursor
@@ -112,6 +131,7 @@ function Calculator({
               onChange={(e) => handleSetAmount(e.target.value)}
             />
           </div>
+          <ErrMsg err={err} />
         </div>
 
         {/* MORTGAGE Term */}
@@ -127,31 +147,46 @@ function Calculator({
               />
               <span>years</span>
             </div>
+            <ErrMsg err={err} />
           </div>
           <div className="input-row">
             <label>Interset rate</label>
-            <div className="year-input">
+            <div className={err === true ? "error year-input" : "year-input"}>
               <input
                 className="no-spinners"
                 type="number"
                 value={rate}
                 onChange={(e) => handleSetRate(e.target.value)}
               />
-              <span>%</span>
+              <span className={err === true ? "error" : ""}>%</span>
             </div>
+            <ErrMsg err={err} />
           </div>
         </div>
         {/* MORTGAGE Type */}
         <div className="types-container">
           <label>mortgage type</label>
           <div className="input-row">
-            <input type="radio" name="type" id="repayment" value="repayment" />
+            <input
+              type="radio"
+              name="type"
+              id="repayment"
+              value="repayment"
+              onClick={(e) => handleMortgageType(e.target.value)}
+            />
             <label for="repayment">Repayment</label>
           </div>
           <div className="input-row">
-            <input type="radio" name="type" id="interest" value="interest" />
+            <input
+              type="radio"
+              name="type"
+              id="interest"
+              value="interest"
+              onClick={(e) => handleMortgageType(e.target.value)}
+            />
             <label for="interest">Interest Only</label>
           </div>
+          <ErrMsg err={err} />
         </div>
         <button onClick={handleSubmit}>
           <svg
@@ -206,5 +241,13 @@ function Results({ showResult, result, totalRepayment }) {
         </div>
       )}
     </div>
+  );
+}
+
+function ErrMsg({ err }) {
+  return (
+    <span className={err === true ? "err-msg" : "hidden"}>
+      The field is required
+    </span>
   );
 }

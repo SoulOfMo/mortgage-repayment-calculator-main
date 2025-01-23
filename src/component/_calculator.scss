@@ -1,13 +1,28 @@
 .calculator-container {
   background-color: $white;
-  padding: 20px;
+  padding: 20px 20px 25px;
   width: 350px;
   border-radius: 10px 0 0 10px;
+  @media (max-width: 600px) {
+    border-radius: 10px 10px 0 0;
+  }
+  .err-msg {
+    color: $Red;
+    font-size: 1rem;
+    font-weight: $ff-lg;
+  }
+  .hidden {
+    display: none;
+  }
   .header {
     text-transform: capitalize;
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    @media (max-width: 600px) {
+      flex-direction: column;
+      gap: 5px;
+    }
     p {
       color: $slate-900;
       font-weight: $ff-lg;
@@ -18,6 +33,11 @@
       color: $slate-700;
       text-transform: capitalize;
       text-decoration: underline;
+      font-size: 1rem;
+      font-weight: $ff-lg;
+      @media (max-width: 600px) {
+        text-align: left;
+      }
     }
   }
 
@@ -34,10 +54,24 @@
       border: 1px solid $slate-700;
       margin-top: 5px;
       transition: border 0.3s ease;
+      border-radius: 5px;
+
+      &.error {
+        border: 1px solid $Red;
+      }
       span {
         background-color: $slate-100;
         padding: 6px 12px;
         font-weight: $ff-lg;
+        border-radius: 5px 0 0 5px;
+        &.error {
+          background-color: $Red;
+          color: $white;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: $Lime;
+        }
       }
 
       input {
@@ -48,7 +82,13 @@
         font-size: 1.4rem;
         width: 100%;
         transition: all 0.3s ease;
+        border-radius: 0 5px 5px 0;
       }
+      & input:hover {
+        border: 1px solid $Lime;
+        border-left: none;
+      }
+
       &:focus-within {
         border: 1px solid $Lime;
       }
@@ -62,19 +102,22 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
-      margin-top: 15px;
+      margin-top: 10px;
       .term-input,
       .year-input {
         display: flex;
+        margin-top: 5px;
         border: 1px solid $slate-700;
         transition: border 0.5s;
         border-radius: 5px;
         padding-left: 15px;
         justify-content: space-between;
+        &.error {
+          border: 1px solid $Red;
+        }
         input {
           border: none;
           outline: none;
-          // padding-left: 15px;
           font-weight: $ff-lg;
           font-size: 1.4rem;
           width: 80px;
@@ -86,19 +129,29 @@
           color: $slate-700;
           font-size: 1.2rem;
           border-radius: 0 5px 5px 0;
+          &.error {
+            background-color: $Red;
+            color: $white;
+          }
         }
       }
     }
 
     //Mortgate Type
     .types-container {
-      margin-top: 15px;
+      margin-top: 10px;
       .input-row {
         border: 1px solid $slate-700;
         padding: 10px;
         width: 100%;
         border-radius: 5px;
         display: flex;
+        margin-top: 5px;
+        &:hover {
+          background-color: hsl(61, 70%, 52%, 0.2);
+          border: 1px solid $Lime;
+          cursor: pointer;
+        }
         input {
           appearance: none;
           width: 12px;
@@ -108,11 +161,12 @@
           cursor: pointer;
           transition: all 0.3s ease;
           position: relative;
+          &:checked {
+            border-color: $Lime;
+            background-color: $Lime;
+          }
         }
-        input:checked {
-          border-color: $Lime;
-          background-color: $Lime;
-        }
+
         &:focus-within {
           border: 1px solid $Lime;
           background-color: $slate-100;
@@ -139,6 +193,12 @@
       align-items: center;
       font-weight: $ff-lg;
       font-size: 1.2rem;
+      @media (max-width: 600px) {
+        margin: 20px auto 0;
+      }
+      &:hover {
+        background-color: hsl(61, 70%, 52%, 0.8);
+      }
       svg {
         width: 15px;
       }

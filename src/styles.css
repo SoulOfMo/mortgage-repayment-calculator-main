@@ -64,17 +64,40 @@ li {
   margin: 0;
 }
 
+input:is(:hover, :active) {
+  cursor: pointer;
+}
+
 .calculator-container {
   background-color: hsl(0, 0%, 100%);
-  padding: 20px;
+  padding: 20px 20px 25px;
   width: 350px;
   border-radius: 10px 0 0 10px;
+}
+@media (max-width: 600px) {
+  .calculator-container {
+    border-radius: 10px 10px 0 0;
+  }
+}
+.calculator-container .err-msg {
+  color: hsl(4, 69%, 50%);
+  font-size: 1rem;
+  font-weight: 700;
+}
+.calculator-container .hidden {
+  display: none;
 }
 .calculator-container .header {
   text-transform: capitalize;
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+}
+@media (max-width: 600px) {
+  .calculator-container .header {
+    flex-direction: column;
+    gap: 5px;
+  }
 }
 .calculator-container .header p {
   color: hsl(202, 55%, 16%);
@@ -86,6 +109,13 @@ li {
   color: hsl(200, 24%, 40%);
   text-transform: capitalize;
   text-decoration: underline;
+  font-size: 1rem;
+  font-weight: 700;
+}
+@media (max-width: 600px) {
+  .calculator-container .header button {
+    text-align: left;
+  }
 }
 .calculator-container form label {
   text-transform: capitalize;
@@ -98,11 +128,24 @@ li {
   border: 1px solid hsl(200, 24%, 40%);
   margin-top: 5px;
   transition: border 0.3s ease;
+  border-radius: 5px;
+}
+.calculator-container form .amount-input.error {
+  border: 1px solid hsl(4, 69%, 50%);
 }
 .calculator-container form .amount-input span {
   background-color: hsl(202, 86%, 94%);
   padding: 6px 12px;
   font-weight: 700;
+  border-radius: 5px 0 0 5px;
+}
+.calculator-container form .amount-input span.error {
+  background-color: hsl(4, 69%, 50%);
+  color: hsl(0, 0%, 100%);
+}
+.calculator-container form .amount-input span:hover {
+  cursor: pointer;
+  background-color: hsl(61, 70%, 52%);
 }
 .calculator-container form .amount-input input {
   border: none;
@@ -112,6 +155,11 @@ li {
   font-size: 1.4rem;
   width: 100%;
   transition: all 0.3s ease;
+  border-radius: 0 5px 5px 0;
+}
+.calculator-container form .amount-input input:hover {
+  border: 1px solid hsl(61, 70%, 52%);
+  border-left: none;
 }
 .calculator-container form .amount-input:focus-within {
   border: 1px solid hsl(61, 70%, 52%);
@@ -123,16 +171,21 @@ li {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 .calculator-container form .terms-container .term-input,
 .calculator-container form .terms-container .year-input {
   display: flex;
+  margin-top: 5px;
   border: 1px solid hsl(200, 24%, 40%);
   transition: border 0.5s;
   border-radius: 5px;
   padding-left: 15px;
   justify-content: space-between;
+}
+.calculator-container form .terms-container .term-input.error,
+.calculator-container form .terms-container .year-input.error {
+  border: 1px solid hsl(4, 69%, 50%);
 }
 .calculator-container form .terms-container .term-input input,
 .calculator-container form .terms-container .year-input input {
@@ -151,8 +204,13 @@ li {
   font-size: 1.2rem;
   border-radius: 0 5px 5px 0;
 }
+.calculator-container form .terms-container .term-input span.error,
+.calculator-container form .terms-container .year-input span.error {
+  background-color: hsl(4, 69%, 50%);
+  color: hsl(0, 0%, 100%);
+}
 .calculator-container form .types-container {
-  margin-top: 15px;
+  margin-top: 10px;
 }
 .calculator-container form .types-container .input-row {
   border: 1px solid hsl(200, 24%, 40%);
@@ -160,7 +218,13 @@ li {
   width: 100%;
   border-radius: 5px;
   display: flex;
+  margin-top: 5px;
   align-items: center;
+}
+.calculator-container form .types-container .input-row:hover {
+  background-color: hsla(61, 70%, 52%, 0.2);
+  border: 1px solid hsl(61, 70%, 52%);
+  cursor: pointer;
 }
 .calculator-container form .types-container .input-row input {
   -webkit-appearance: none;
@@ -202,6 +266,14 @@ li {
   font-weight: 700;
   font-size: 1.2rem;
 }
+@media (max-width: 600px) {
+  .calculator-container form button {
+    margin: 20px auto 0;
+  }
+}
+.calculator-container form button:hover {
+  background-color: hsla(61, 70%, 52%, 0.8);
+}
 .calculator-container form button svg {
   width: 15px;
 }
@@ -215,15 +287,29 @@ li {
   background-color: hsl(0, 0%, 100%);
   border-radius: 15px;
 }
+@media (max-width: 600px) {
+  .parent-container {
+    grid-template-columns: repeat(1, 1fr);
+    width: 300px;
+  }
+}
 
 .results-container {
   background-color: hsl(202, 55%, 16%);
   border-radius: 0 15px 15px 40px;
   display: flex;
   padding: 25px 25px 0;
+  width: 350px;
+}
+@media (max-width: 600px) {
+  .results-container {
+    border-radius: 0;
+    padding-bottom: 25px;
+  }
 }
 .results-container img {
-  margin: 0 auto;
+  margin: 50px auto 0;
+  width: 150px;
 }
 .results-container .empty-result p {
   color: hsl(0, 0%, 100%);
@@ -237,6 +323,11 @@ li {
   color: hsl(203, 41%, 72%);
   width: 320px;
   font-size: 1.2rem;
+}
+@media (max-width: 600px) {
+  .results-container .empty-result span {
+    width: unset;
+  }
 }
 .results-container .result-page p {
   color: hsl(0, 0%, 100%);

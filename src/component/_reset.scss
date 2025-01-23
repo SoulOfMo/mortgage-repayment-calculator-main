@@ -60,3 +60,9 @@ li {
   appearance: none;
   margin: 0;
 }
+
+input {
+  &:is(:hover, :active) {
+    cursor: pointer;
+  }
+}

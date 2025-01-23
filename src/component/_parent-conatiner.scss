@@ -6,4 +6,8 @@
   grid-template-columns: repeat(2, 1fr);
   background-color: $white;
   border-radius: 15px;
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(1, 1fr);
+    width: 300px;
+  }
 }
