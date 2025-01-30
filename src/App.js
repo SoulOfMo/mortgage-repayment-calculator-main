@@ -6,7 +6,7 @@ function App() {
   const [result, setResult] = useState("");
   const [totalRepayment, setTotalRepayment] = useState("");
   return (
-    <div className="parent-container">
+    <main className="parent-container">
       <Calculator
         handleTotalRepayment={setTotalRepayment}
         handleShowResult={setShowResult}
@@ -18,7 +18,7 @@ function App() {
         result={result}
         totalRepayment={totalRepayment}
       />
-    </div>
+    </main>
   );
 }
 
@@ -33,6 +33,11 @@ function Calculator({
   const [term, setTerm] = useState("");
   const [rate, setRate] = useState("");
   const [err, setErr] = useState(false);
+  const [mortgageTypeError, setMortgageTypeError] = useState(false);
+  const [mortgageTermError, setMortgageTermError] = useState(false);
+  const [mortgageAmountError, setMortgageAmountError] = useState(false);
+  const [interestRateError, setInterestRateError] = useState(false);
+
   const [type, setType] = useState("");
 
   function handleMortgageType(value) {
@@ -66,17 +71,30 @@ function Calculator({
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (
-      amount.trim(" ") === "" ||
-      term.trim(" ") === "" ||
-      rate.trim(" ") === "" ||
-      type === ""
-    ) {
-      setErr(true);
-      return;
-    } else setErr(false);
+    amount.trim(" ") === ""
+      ? setMortgageAmountError(true)
+      : setMortgageAmountError(false);
 
-    console.log(amount, term, rate);
+    term.trim(" ") === ""
+      ? setMortgageTermError(true)
+      : setMortgageTermError(false);
+
+    rate.trim(" ") === ""
+      ? setInterestRateError(true)
+      : setInterestRateError(false);
+
+    type.trim(" ") === ""
+      ? setMortgageTypeError(true)
+      : setMortgageTypeError(false);
+
+    if (
+      amount.trim("") === "" ||
+      rate.trim("") === "" ||
+      term.trim("") === "" ||
+      type.trim("") === ""
+    )
+      return;
+
     const annualInterest = Number(rate) / (100 * 12);
     const loanTerm = Number(term) * 12;
     const constant = (1 + annualInterest) ** loanTerm;
@@ -94,10 +112,6 @@ function Calculator({
 
     const totalInterest = formmatted.format(
       (interest * 12 * Number(term)).toFixed(2)
-    );
-    console.log(
-      formmatted.format(result.toFixed(2)),
-      formmatted.format(totalRepayment.toFixed(2))
     );
 
     if (type === "repayment") {
@@ -120,24 +134,34 @@ function Calculator({
       </div>
       <form>
         <div className="form--row">
-          <label>mortgage amount</label>
-          <div className={err === true ? "error amount-input" : "amount-input"}>
-            <span className={err === true ? "error" : ""}>£</span>
+          <p>mortgage amount</p>
+          <label
+            htmlFor="amount"
+            className={
+              mortgageAmountError === true
+                ? "error amount-input"
+                : "amount-input"
+            }
+          >
+            <span className={mortgageAmountError === true ? "error" : ""}>
+              £
+            </span>
             <input
+              id="amount"
               className="no-spinners"
               cursor
               type="number"
               value={amount}
               onChange={(e) => handleSetAmount(e.target.value)}
             />
-          </div>
-          <ErrMsg err={err} />
+          </label>
+          <ErrMsg err={mortgageAmountError} />
         </div>
 
         {/* MORTGAGE Term */}
         <div className="terms-container">
-          <div className="input-row">
-            <label>mortgage term</label>
+          <label className="input-row">
+            <p>mortgage term</p>
             <div className="term-input">
               <input
                 className="no-spinners"
@@ -147,10 +171,10 @@ function Calculator({
               />
               <span>years</span>
             </div>
-            <ErrMsg err={err} />
-          </div>
-          <div className="input-row">
-            <label>Interset rate</label>
+            <ErrMsg err={mortgageTermError} />
+          </label>
+          <label className="input-row">
+            <p>Interset rate</p>
             <div className={err === true ? "error year-input" : "year-input"}>
               <input
                 className="no-spinners"
@@ -160,13 +184,13 @@ function Calculator({
               />
               <span className={err === true ? "error" : ""}>%</span>
             </div>
-            <ErrMsg err={err} />
-          </div>
+            <ErrMsg err={interestRateError} />
+          </label>
         </div>
         {/* MORTGAGE Type */}
         <div className="types-container">
-          <label>mortgage type</label>
-          <div className="input-row">
+          <p>mortgage type</p>
+          <label htmlFor="repayment" className="input-row">
             <input
               type="radio"
               name="type"
@@ -174,9 +198,9 @@ function Calculator({
               value="repayment"
               onClick={(e) => handleMortgageType(e.target.value)}
             />
-            <label for="repayment">Repayment</label>
-          </div>
-          <div className="input-row">
+            <span for="repayment">Repayment</span>
+          </label>
+          <label htmlFor="interest" className="input-row">
             <input
               type="radio"
               name="type"
@@ -184,9 +208,9 @@ function Calculator({
               value="interest"
               onClick={(e) => handleMortgageType(e.target.value)}
             />
-            <label for="interest">Interest Only</label>
-          </div>
-          <ErrMsg err={err} />
+            <span for="interest">Interest Only</span>
+          </label>
+          <ErrMsg err={mortgageTypeError} />
         </div>
         <button onClick={handleSubmit}>
           <svg

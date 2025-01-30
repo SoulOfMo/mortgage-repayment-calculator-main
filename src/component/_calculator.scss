@@ -43,7 +43,7 @@
 
   // Form
   form {
-    label {
+    p {
       text-transform: capitalize;
       font-size: 1.2rem;
       color: $slate-700;
@@ -171,10 +171,11 @@
           border: 1px solid $Lime;
           background-color: $slate-100;
         }
-        label {
+        span {
           font-weight: $ff-lg;
           color: $slate-900;
           padding-left: 10px;
+          font-size: 1.2rem;
         }
         align-items: center;
         &:first-of-type {

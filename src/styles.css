@@ -117,7 +117,7 @@ input:is(:hover, :active) {
     text-align: left;
   }
 }
-.calculator-container form label {
+.calculator-container form p {
   text-transform: capitalize;
   font-size: 1.2rem;
   color: hsl(200, 24%, 40%);
@@ -246,10 +246,11 @@ input:is(:hover, :active) {
   border: 1px solid hsl(61, 70%, 52%);
   background-color: hsl(202, 86%, 94%);
 }
-.calculator-container form .types-container .input-row label {
+.calculator-container form .types-container .input-row span {
   font-weight: 700;
   color: hsl(202, 55%, 16%);
   padding-left: 10px;
+  font-size: 1.2rem;
 }
 .calculator-container form .types-container .input-row:first-of-type {
   margin-bottom: 10px;
@@ -291,6 +292,7 @@ input:is(:hover, :active) {
   .parent-container {
     grid-template-columns: repeat(1, 1fr);
     width: 300px;
+    margin: 20px auto 20px;
   }
 }
 
@@ -368,4 +370,9 @@ input:is(:hover, :active) {
   height: 100%;
   background-color: hsl(202, 86%, 94%);
   place-content: center;
+}
+@media (max-width: 600px) {
+  #root {
+    height: unset;
+  }
 }/*# sourceMappingURL=styles.css.map */
