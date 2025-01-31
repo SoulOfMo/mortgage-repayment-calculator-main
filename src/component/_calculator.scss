@@ -23,9 +23,10 @@
       flex-direction: column;
       gap: 5px;
     }
-    p {
+    h1 {
       color: $slate-900;
       font-weight: $ff-lg;
+      font-size: 1.6rem;
     }
     button {
       background-color: transparent;
@@ -43,7 +44,7 @@
 
   // Form
   form {
-    p {
+    .input-type {
       text-transform: capitalize;
       font-size: 1.2rem;
       color: $slate-700;
@@ -62,6 +63,7 @@
       span {
         background-color: $slate-100;
         padding: 6px 12px;
+        color: $slate-700;
         font-weight: $ff-lg;
         border-radius: 5px 0 0 5px;
         &.error {

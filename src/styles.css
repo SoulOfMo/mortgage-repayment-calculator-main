@@ -99,9 +99,10 @@ input:is(:hover, :active) {
     gap: 5px;
   }
 }
-.calculator-container .header p {
+.calculator-container .header h1 {
   color: hsl(202, 55%, 16%);
   font-weight: 700;
+  font-size: 1.6rem;
 }
 .calculator-container .header button {
   background-color: transparent;
@@ -117,7 +118,7 @@ input:is(:hover, :active) {
     text-align: left;
   }
 }
-.calculator-container form p {
+.calculator-container form .input-type {
   text-transform: capitalize;
   font-size: 1.2rem;
   color: hsl(200, 24%, 40%);
@@ -136,6 +137,7 @@ input:is(:hover, :active) {
 .calculator-container form .amount-input span {
   background-color: hsl(202, 86%, 94%);
   padding: 6px 12px;
+  color: hsl(200, 24%, 40%);
   font-weight: 700;
   border-radius: 5px 0 0 5px;
 }

@@ -32,7 +32,6 @@ function Calculator({
   const [amount, setAmount] = useState("");
   const [term, setTerm] = useState("");
   const [rate, setRate] = useState("");
-  const [err, setErr] = useState(false);
   const [mortgageTypeError, setMortgageTypeError] = useState(false);
   const [mortgageTermError, setMortgageTermError] = useState(false);
   const [mortgageAmountError, setMortgageAmountError] = useState(false);
@@ -42,21 +41,17 @@ function Calculator({
 
   function handleMortgageType(value) {
     setType(value);
-    console.log(type);
   }
   function handleSetAmount(value) {
     setAmount(value);
-    console.log(amount);
   }
 
   function handleSetTerm(value) {
     setTerm(value);
-    console.log(term);
   }
 
   function handleSetRate(value) {
     setRate(value);
-    console.log(rate);
   }
 
   function handleClearAll() {
@@ -65,7 +60,10 @@ function Calculator({
     setTerm("");
     handleShowResult(false);
     setType("");
-    setErr(false);
+    setInterestRateError(false);
+    setMortgageAmountError(false);
+    setMortgageTermError(false);
+    setMortgageTypeError(false);
   }
 
   function handleSubmit(e) {
@@ -127,14 +125,15 @@ function Calculator({
   return (
     <div className="calculator-container">
       <div className="header">
-        <p>mortgage calculator</p>
+        <h1>mortgage calculator</h1>
         <button aria-label="clear-btn" onClick={handleClearAll}>
           clear all
         </button>
       </div>
+
       <form>
         <div className="form--row">
-          <p>mortgage amount</p>
+          <span className="input-type">mortgage amount</span>
           <label
             htmlFor="amount"
             className={
@@ -149,7 +148,6 @@ function Calculator({
             <input
               id="amount"
               className="no-spinners"
-              cursor
               type="number"
               value={amount}
               onChange={(e) => handleSetAmount(e.target.value)}
@@ -161,8 +159,8 @@ function Calculator({
         {/* MORTGAGE Term */}
         <div className="terms-container">
           <label className="input-row">
-            <p>mortgage term</p>
-            <div className="term-input">
+            <span className="input-type">mortgage term</span>
+            <span className="term-input">
               <input
                 className="no-spinners"
                 type="number"
@@ -170,46 +168,41 @@ function Calculator({
                 onChange={(e) => handleSetTerm(e.target.value)}
               />
               <span>years</span>
-            </div>
+            </span>
             <ErrMsg err={mortgageTermError} />
           </label>
+
           <label className="input-row">
-            <p>Interset rate</p>
-            <div className={err === true ? "error year-input" : "year-input"}>
+            <span className="input-type">Interset rate</span>
+            <span className="year-input">
               <input
                 className="no-spinners"
                 type="number"
                 value={rate}
                 onChange={(e) => handleSetRate(e.target.value)}
               />
-              <span className={err === true ? "error" : ""}>%</span>
-            </div>
+              <span>%</span>
+            </span>
             <ErrMsg err={interestRateError} />
           </label>
         </div>
+
         {/* MORTGAGE Type */}
         <div className="types-container">
-          <p>mortgage type</p>
-          <label htmlFor="repayment" className="input-row">
-            <input
-              type="radio"
-              name="type"
-              id="repayment"
-              value="repayment"
-              onClick={(e) => handleMortgageType(e.target.value)}
-            />
-            <span for="repayment">Repayment</span>
-          </label>
-          <label htmlFor="interest" className="input-row">
-            <input
-              type="radio"
-              name="type"
-              id="interest"
-              value="interest"
-              onClick={(e) => handleMortgageType(e.target.value)}
-            />
-            <span for="interest">Interest Only</span>
-          </label>
+          <span className="input-type">mortgage type</span>
+          <MortgageType
+            id="repayment"
+            value="repayment"
+            handleMortgageType={handleMortgageType}
+            children="Repayment"
+          />
+
+          <MortgageType
+            id="interest"
+            value="interest"
+            handleMortgageType={handleMortgageType}
+            children="Interest Only"
+          />
           <ErrMsg err={mortgageTypeError} />
         </div>
         <button onClick={handleSubmit}>
@@ -273,5 +266,20 @@ function ErrMsg({ err }) {
     <span className={err === true ? "err-msg" : "hidden"}>
       The field is required
     </span>
+  );
+}
+
+function MortgageType({ children, id, value, handleMortgageType }) {
+  return (
+    <label htmlFor="repayment" className="input-row">
+      <input
+        type="radio"
+        name="type"
+        id={id}
+        value={value}
+        onClick={(e) => handleMortgageType(e.target.value)}
+      />
+      <span>{children}</span>
+    </label>
   );
 }
